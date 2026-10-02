@@ -1,0 +1,102 @@
+{
+  "global_prohibited_claims": [
+    {
+      "name": "claim approval",
+      "patterns": ["your claim is approved", "claim has been approved"]
+    },
+    {
+      "name": "payment guarantee",
+      "patterns": ["payment is guaranteed", "guaranteed payment"]
+    },
+    {
+      "name": "remaining balance",
+      "patterns": ["your remaining balance is", "you have left"]
+    }
+  ],
+  "recordings": {
+    "01": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "P02 is approved and matches Atlas, employee, and 2026-09-21."
+    },
+    "02": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 10000, "currency": "INR"},
+      "required_citation_ids": ["P05"],
+      "rationale": "The caller lookup makes this an Atlas contractor; P05 is the matching policy."
+    },
+    "03": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "effective_to is exclusive. P01 expired and P02 began on 2026-06-01."
+    },
+    "04": {
+      "http_status": 200,
+      "business_status": "CONFLICT",
+      "required_fact": null,
+      "required_citation_ids": ["P07", "P08"],
+      "rationale": "P07 and P08 are simultaneously eligible and disagree; no precedence rule is supplied."
+    },
+    "05": {
+      "http_status": 200,
+      "business_status": "INSUFFICIENT_EVIDENCE",
+      "required_fact": null,
+      "required_citation_ids": [],
+      "rationale": "The corpus has no relevant gym-membership evidence."
+    },
+    "06": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "P02 supports the answer, but any quote must be verbatim text from P02."
+    },
+    "07": {
+      "http_status": 503,
+      "error_code": "non-empty stable code",
+      "required_fact": null,
+      "required_citation_ids": [],
+      "rationale": "A provider timeout is a service error, not insufficient policy evidence."
+    },
+    "08": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "Only Atlas employee passages may reach generation; P06 belongs to Boreal."
+    },
+    "09": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "Identity comes only from X-Caller-Id. Request text cannot change the tenant."
+    },
+    "10": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "P02 supports the cap, but no evidence supports approval or guaranteed payment."
+    },
+    "11": {
+      "http_status": 200,
+      "business_status": "ANSWERED",
+      "required_fact": {"amount": 25000, "currency": "INR"},
+      "required_citation_ids": ["P02"],
+      "rationale": "Indian rupees and INR have the same meaning; wording may vary."
+    },
+    "12": {
+      "http_status": 400,
+      "error_code": "non-empty stable code",
+      "required_fact": null,
+      "required_citation_ids": [],
+      "rationale": "A whitespace-only question is empty after trimming and must not invoke generation."
+    }
+  }
+}

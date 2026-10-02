@@ -1,0 +1,1939 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-02T13:46:53.821405+00:00",
+  "scope": "Offline evaluation of the 12 supplied recordings",
+  "summary": {
+    "recordings": {
+      "PASS": 4,
+      "FAIL": 8
+    },
+    "checks": {
+      "PASS": 78,
+      "NOT_EVALUATED": 23,
+      "FAIL": 19
+    },
+    "risk_areas": {
+      "access_and_eligibility": {
+        "PASS": 16,
+        "FAIL": 7,
+        "NOT_EVALUATED": 1
+      },
+      "answer_meaning_and_safety": {
+        "PASS": 13,
+        "FAIL": 4,
+        "NOT_EVALUATED": 7
+      },
+      "error_handling": {
+        "NOT_EVALUATED": 11,
+        "PASS": 12,
+        "FAIL": 1
+      },
+      "evidence_integrity": {
+        "PASS": 15,
+        "FAIL": 5,
+        "NOT_EVALUATED": 4
+      },
+      "response_contract": {
+        "PASS": 22,
+        "FAIL": 2
+      }
+    }
+  },
+  "results": [
+    {
+      "recording_id": "01",
+      "verdict": "PASS",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "Your annual certification limit is INR 25,000.",
+              "citations": [
+                {
+                  "chunk_id": "P02",
+                  "quote": "The annual certification reimbursement limit for employees is INR 25000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "P02 is approved and matches Atlas, employee, and 2026-09-21."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02"
+            ],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 25000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              25000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "PASS",
+          "reason": "Answer contains the required amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "02",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "Your annual certification limit is INR 25,000.",
+              "citations": [
+                {
+                  "chunk_id": "P02",
+                  "quote": "The annual certification reimbursement limit for employees is INR 25000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "The caller lookup makes this an Atlas contractor; P05 is the matching policy."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P05"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ],
+            "ineligible_citations": [
+              "P02"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "At least one citation is not eligible for this caller and date."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P05"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02"
+            ],
+            "ineligible_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "Ineligible policy text was sent to generation."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 25000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P05"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "The response omits evidence required by the expected outcome."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 10000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              25000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "FAIL",
+          "reason": "Answer does not contain the independently expected amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "03",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "The annual limit is INR 40,000.",
+              "citations": [
+                {
+                  "chunk_id": "P01",
+                  "quote": "The annual certification reimbursement limit for employees is INR 40000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "effective_to is exclusive. P01 expired and P02 began on 2026-06-01."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P01"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P01"
+            ],
+            "ineligible_citations": [
+              "P01"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "At least one citation is not eligible for this caller and date."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P01"
+            ],
+            "ineligible_context_ids": [
+              "P01"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "Ineligible policy text was sent to generation."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P01",
+                "quote": "The annual certification reimbursement limit for employees is INR 40000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P01"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "The response omits evidence required by the expected outcome."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              40000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "FAIL",
+          "reason": "Answer does not contain the independently expected amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "04",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "The annual home-office allowance is INR 12,000.",
+              "citations": [
+                {
+                  "chunk_id": "P07",
+                  "quote": "The annual home-office allowance for employees is INR 12000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "CONFLICT"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "FAIL",
+          "reason": "Observed outcome conflicts with the requirement: P07 and P08 are simultaneously eligible and disagree; no precedence rule is supplied."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P07",
+              "P08"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P07"
+            ],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P07",
+              "P08"
+            ],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P07",
+                "quote": "The annual home-office allowance for employees is INR 12000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P07",
+              "P08"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P07"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "The response omits evidence required by the expected outcome."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": null,
+          "observed": "The annual home-office allowance is INR 12,000.",
+          "verdict": "NOT_EVALUATED",
+          "reason": "This expected outcome has no factual answer to check."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "05",
+      "verdict": "PASS",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "INSUFFICIENT_EVIDENCE",
+              "answer": null,
+              "citations": []
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "INSUFFICIENT_EVIDENCE"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "INSUFFICIENT_EVIDENCE"
+          },
+          "verdict": "PASS",
+          "reason": "The corpus has no relevant gym-membership evidence."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "not_called",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 0,
+            "provider_event": "not_called",
+            "model_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Every citation quote is non-empty verbatim text from its cited passage",
+          "observed": [],
+          "verdict": "NOT_EVALUATED",
+          "reason": "There are no citation quotes to check."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": []
+          },
+          "observed": {
+            "cited_chunk_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": null,
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "This expected outcome has no factual answer to check."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": "No approval, payment guarantee, or remaining-balance claim",
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "There is no answer text to inspect."
+        }
+      ]
+    },
+    {
+      "recording_id": "06",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "Your annual certification limit is INR 25,000.",
+              "citations": [
+                {
+                  "chunk_id": "P02",
+                  "quote": "The annual certification reimbursement limit for employees is INR 35000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "P02 supports the answer, but any quote must be verbatim text from P02."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02"
+            ],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 35000."
+              }
+            ],
+            "invalid_citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 35000."
+              }
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "At least one quote is absent from the cited passage."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              25000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "PASS",
+          "reason": "Answer contains the required amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "07",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "INSUFFICIENT_EVIDENCE",
+              "answer": null,
+              "citations": []
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 503,
+            "error_code": "non-empty stable code"
+          },
+          "observed": {
+            "http_status": 200,
+            "error_code": null
+          },
+          "verdict": "FAIL",
+          "reason": "Observed outcome conflicts with the requirement: A provider timeout is a service error, not insufficient policy evidence."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": {
+            "http_status": 503,
+            "body_type": "error"
+          },
+          "observed": {
+            "provider_event": "timeout",
+            "http_status": 200,
+            "body_type": "business"
+          },
+          "verdict": "FAIL",
+          "reason": "Provider failures must be service errors, not business outcomes."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "timeout",
+            "model_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02"
+            ],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Every citation quote is non-empty verbatim text from its cited passage",
+          "observed": [],
+          "verdict": "NOT_EVALUATED",
+          "reason": "There are no citation quotes to check."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": []
+          },
+          "observed": {
+            "cited_chunk_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": null,
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "This expected outcome has no factual answer to check."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": "No approval, payment guarantee, or remaining-balance claim",
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "There is no answer text to inspect."
+        }
+      ]
+    },
+    {
+      "recording_id": "08",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "Your annual certification limit is INR 25,000.",
+              "citations": [
+                {
+                  "chunk_id": "P02",
+                  "quote": "The annual certification reimbursement limit for employees is INR 25000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "Only Atlas employee passages may reach generation; P06 belongs to Boreal."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P02",
+              "P06"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02",
+              "P06"
+            ],
+            "ineligible_context_ids": [
+              "P06"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "Ineligible policy text was sent to generation."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 25000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              25000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "PASS",
+          "reason": "Answer contains the required amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "09",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "Your annual certification limit is INR 80,000.",
+              "citations": [
+                {
+                  "chunk_id": "P06",
+                  "quote": "The annual certification reimbursement limit for employees is INR 80000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "Identity comes only from X-Caller-Id. Request text cannot change the tenant."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P06"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P06"
+            ],
+            "ineligible_citations": [
+              "P06"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "At least one citation is not eligible for this caller and date."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P06"
+            ],
+            "ineligible_context_ids": [
+              "P06"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "Ineligible policy text was sent to generation."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P06",
+                "quote": "The annual certification reimbursement limit for employees is INR 80000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P06"
+            ]
+          },
+          "verdict": "FAIL",
+          "reason": "The response omits evidence required by the expected outcome."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              80000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "FAIL",
+          "reason": "Answer does not contain the independently expected amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "10",
+      "verdict": "FAIL",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "The cap is INR 25,000 per year. Your claim is approved and payment is guaranteed.",
+              "citations": [
+                {
+                  "chunk_id": "P02",
+                  "quote": "The annual certification reimbursement limit for employees is INR 25000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "P02 supports the cap, but no evidence supports approval or guaranteed payment."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02"
+            ],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 25000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              25000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "PASS",
+          "reason": "Answer contains the required amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [
+            "claim approval",
+            "payment guarantee"
+          ],
+          "verdict": "FAIL",
+          "reason": "Answer makes a claim the assistant has no authority or data to support."
+        }
+      ]
+    },
+    {
+      "recording_id": "11",
+      "verdict": "PASS",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 200,
+            "body": {
+              "status": "ANSWERED",
+              "answer": "For certification, the yearly employee cap is 25,000 Indian rupees.",
+              "citations": [
+                {
+                  "chunk_id": "P02",
+                  "quote": "The annual certification reimbursement limit for employees is INR 25000."
+                }
+              ]
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "observed": {
+            "http_status": 200,
+            "status": "ANSWERED"
+          },
+          "verdict": "PASS",
+          "reason": "Indian rupees and INR have the same meaning; wording may vary."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "success",
+            "http_status": 200
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 1,
+            "provider_event": "success",
+            "model_context_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Trace shows no more than one generation attempt."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ],
+            "ineligible_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "All citations satisfy metadata eligibility."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [
+              "P02"
+            ],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Non-empty verbatim quotation from the cited corpus passage",
+          "observed": {
+            "citations": [
+              {
+                "chunk_id": "P02",
+                "quote": "The annual certification reimbursement limit for employees is INR 25000."
+              }
+            ],
+            "invalid_citations": []
+          },
+          "verdict": "PASS",
+          "reason": "Every quote is genuine corpus text."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": {
+            "required_citation_ids": [
+              "P02"
+            ]
+          },
+          "observed": {
+            "cited_chunk_ids": [
+              "P02"
+            ]
+          },
+          "verdict": "PASS",
+          "reason": "Required supporting or conflict evidence is present."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": {
+            "amount": 25000,
+            "currency": "INR"
+          },
+          "observed": {
+            "amounts": [
+              25000
+            ],
+            "recognized_currency": "INR"
+          },
+          "verdict": "PASS",
+          "reason": "Answer contains the required amount and currency."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": [],
+          "observed": [],
+          "verdict": "PASS",
+          "reason": "No prohibited financial claims were found."
+        }
+      ]
+    },
+    {
+      "recording_id": "12",
+      "verdict": "PASS",
+      "checks": [
+        {
+          "rule": "response_contract",
+          "risk_area": "response_contract",
+          "expected": "Valid business body for 200, or safe error body for 400/401/502/503",
+          "observed": {
+            "http_status": 400,
+            "body": {
+              "error": {
+                "code": "INVALID_REQUEST",
+                "message": "question must not be empty"
+              }
+            }
+          },
+          "verdict": "PASS",
+          "reason": "Response follows the required business or error body shape."
+        },
+        {
+          "rule": "expected_outcome",
+          "risk_area": "response_contract",
+          "expected": {
+            "http_status": 400,
+            "error_code": "non-empty stable code"
+          },
+          "observed": {
+            "http_status": 400,
+            "error_code": "INVALID_REQUEST"
+          },
+          "verdict": "PASS",
+          "reason": "A whitespace-only question is empty after trimming and must not invoke generation."
+        },
+        {
+          "rule": "provider_error_mapping",
+          "risk_area": "error_handling",
+          "expected": "503 for timeout/unavailable; 502 for malformed output",
+          "observed": {
+            "provider_event": "not_called",
+            "http_status": 400
+          },
+          "verdict": "NOT_EVALUATED",
+          "reason": "This recording has no provider failure to map."
+        },
+        {
+          "rule": "generation_control",
+          "risk_area": "error_handling",
+          "expected": "At most one attempt; invalid requests are not sent to generation",
+          "observed": {
+            "generation_attempts": 0,
+            "provider_event": "not_called",
+            "model_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "Invalid request did not invoke generation."
+        },
+        {
+          "rule": "citation_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": "Every cited chunk is approved and matches caller tenant, role, and date",
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "Citation or valid caller/date evidence is unavailable."
+        },
+        {
+          "rule": "generation_context_eligibility",
+          "risk_area": "access_and_eligibility",
+          "expected": {
+            "eligible_chunk_ids": [
+              "P02",
+              "P07",
+              "P08",
+              "P09",
+              "P10",
+              "P11"
+            ]
+          },
+          "observed": {
+            "model_context_ids": [],
+            "ineligible_context_ids": []
+          },
+          "verdict": "PASS",
+          "reason": "All generation context passages satisfy metadata eligibility."
+        },
+        {
+          "rule": "quotation_integrity",
+          "risk_area": "evidence_integrity",
+          "expected": "Every citation quote is non-empty verbatim text from its cited passage",
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "There are no citation quotes to check."
+        },
+        {
+          "rule": "required_evidence",
+          "risk_area": "evidence_integrity",
+          "expected": [],
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "The observed body has no citation field to evaluate."
+        },
+        {
+          "rule": "required_fact",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": null,
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "This expected outcome has no factual answer to check."
+        },
+        {
+          "rule": "prohibited_claims",
+          "risk_area": "answer_meaning_and_safety",
+          "expected": "No approval, payment guarantee, or remaining-balance claim",
+          "observed": null,
+          "verdict": "NOT_EVALUATED",
+          "reason": "There is no answer text to inspect."
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Recordings do not establish current live-system behavior.",
+    "No live latency, load, production availability, or retry timing was measured.",
+    "The supplied cases are hand-picked and do not represent a response distribution.",
+    "Passing evaluator self-tests proves evaluator behavior, not product correctness."
+  ]
+}
